@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FineFlow AI - Scale Your Business with Smart AI</title>
+    <meta name="description" content="Transform your operations with cutting-edge AI platform. Automate processes, gain insights, and accelerate growth with intelligent solutions.">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <style>
+        /* Custom animations and styles */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes particle {
+            0% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { opacity: 0.8; }
+            100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-particle {
+            animation: particle 3s ease-out infinite;
+        }
+        
+        .animate-rotate {
+            animation: rotate 8s linear infinite;
+        }
+        
+        .animate-gradient {
+            background-size: 200% 200%;
+            animation: gradient 3s ease infinite;
+        }
+        
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .text-gradient {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .bg-gradient-animated {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background-size: 400% 400%;
+            animation: gradient 4s ease infinite;
+        }
+        
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .slide-in-left {
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.8s ease;
+        }
+        
+        .slide-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .slide-in-right {
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .slide-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: all 0.8s ease;
+        }
+        
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <header id="header" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                    <img src="images/logo.png" alt="FineFlow AI Logo" width="35">
+
+                    <span class="text-2xl font-bold text-gradient animate-gradient">FineFlow AI</span>
+                </div>
+
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Home</a>
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Features</a>
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Services</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">About</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Contact</a>
+                </nav>
+
+                <div class="hidden md:flex items-center space-x-4">
+                    <button class="text-gray-700 hover:text-blue-600 transition-colors btn-hover">Sign In</button>
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all btn-hover">
+                        Get Started
+                    </button>
+                </div>
+
+                <button id="mobile-menu-btn" class="md:hidden">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden">
+                <nav class="flex flex-col space-y-4">
+                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
+                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors">Features</a>
+                    <a href="#services" class="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
+                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
+                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+                </nav>
+                <div class="flex flex-col space-y-2 mt-4">
+                    <button class="text-gray-700 hover:text-blue-600 transition-colors text-left">Sign In</button>
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
+                        Get Started
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="min-h-screen flex items-center pt-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 20%; top: 40%; animation-delay: 0.5s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 30%; top: 60%; animation-delay: 1s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 40%; top: 30%; animation-delay: 1.5s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 50%; top: 70%; animation-delay: 2s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 60%; top: 25%; animation-delay: 2.5s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 70%; top: 50%; animation-delay: 3s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 80%; top: 35%; animation-delay: 3.5s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 90%; top: 65%; animation-delay: 4s;"></div>
+        </div>
+
+        <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg opacity-20 animate-float" style="animation-delay: 1s;"></div>
+        <div class="absolute bottom-40 left-20 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="space-y-8 slide-in-left">
+                    <div class="space-y-6">
+                        <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                            <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
+                            🚀 Next-Generation AI Solutions
+                        </div>
+                        
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
+                            Scale Your Business with
+                            <span class="text-gradient animate-gradient"> Smart AI</span>
+                        </h1>
+                        
+                        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                            Transform your operations with our cutting-edge AI platform. Automate processes, 
+                            gain insights, and accelerate growth with intelligent solutions tailored for your business.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-gradient-animated text-white px-8 py-4 rounded-full hover:shadow-2xl transition-all flex items-center justify-center btn-hover">
+                            <span>Start Free Trial</span>
+                            <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                        </button>
+                        
+                        <button class="flex items-center justify-center px-8 py-4 border-2 border-gray-300 rounded-full hover:border-blue-600 hover:text-blue-600 transition-all btn-hover">
+                            <i data-lucide="play" class="mr-2 w-5 h-5"></i>
+                            Watch Demo
+                        </button>
+                    </div>
+
+                    <div class="flex items-center space-x-8 pt-8">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gray-900">50K+</div>
+                            <div class="text-gray-600">Active Users</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gray-900">99.9%</div>
+                            <div class="text-gray-600">Uptime</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-gray-900">24/7</div>
+                            <div class="text-gray-600">Support</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative slide-in-right">
+                    <div class="relative z-10 bg-white rounded-2xl shadow-2xl p-8 transform card-hover">
+                        <div class="space-y-4">
+                            <div class="h-4 bg-gradient-to-r from-blue-200 to-purple-200 rounded w-3/4"></div>
+                            <div class="h-4 bg-gradient-to-r from-blue-200 to-purple-200 rounded w-1/2"></div>
+                            <div class="h-32 bg-gradient-to-br from-blue-100 to-purple-100 rounded-lg relative overflow-hidden">
+                                <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-30 animate-pulse"></div>
+                            </div>
+                            <div class="flex space-x-2">
+                                <div class="h-4 bg-gradient-to-r from-blue-200 to-purple-200 rounded w-1/4"></div>
+                                <div class="h-4 bg-gradient-to-r from-blue-200 to-purple-200 rounded w-1/3"></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="absolute -top-4 -right-4 w-72 h-72 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl opacity-20 animate-float"></div>
+                    <div class="absolute -bottom-4 -left-4 w-64 h-64 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                    Powerful Features for
+                    <span class="text-gradient animate-gradient"> Modern Businesses</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Discover the capabilities that make FineFlow AI the preferred choice for 
+                    forward-thinking companies worldwide.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Advanced Machine Learning</h3>
+                    <p class="text-gray-600 leading-relaxed">Leverage cutting-edge ML algorithms to extract insights from your data and make intelligent predictions.</p>
+                </div>
+
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Lightning Fast Processing</h3>
+                    <p class="text-gray-600 leading-relaxed">Process massive datasets in seconds with our optimized AI infrastructure and parallel computing.</p>
+                </div>
+
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="shield" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Enterprise Security</h3>
+                    <p class="text-gray-600 leading-relaxed">Bank-grade security with end-to-end encryption, compliance, and data privacy protection.</p>
+                </div>
+
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="bar-chart" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Real-time Analytics</h3>
+                    <p class="text-gray-600 leading-relaxed">Get instant insights with live dashboards and automated reporting for data-driven decisions.</p>
+                </div>
+
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="settings" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Workflow Automation</h3>
+                    <p class="text-gray-600 leading-relaxed">Automate complex business processes and eliminate repetitive tasks with intelligent workflows.</p>
+                </div>
+
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i data-lucide="users" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Team Collaboration</h3>
+                    <p class="text-gray-600 leading-relaxed">Enable seamless collaboration with shared workspaces, version control, and team management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="py-20 bg-gray-50 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                    Our <span class="text-gradient animate-gradient">AI Services</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Comprehensive AI solutions designed to address your specific business challenges 
+                    and drive measurable results.
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="database" class="w-8 h-8 text-white"></i>
+                        </div>
+                        
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">Data Intelligence</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Transform raw data into actionable insights with our advanced analytics platform.</p>
+                            
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Predictive Analytics
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Data Visualization
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Custom Dashboards
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Automated Reports
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="message-square" class="w-8 h-8 text-white"></i>
+                        </div>
+                        
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">AI Chatbots</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Deploy intelligent chatbots that understand context and provide human-like interactions.</p>
+                            
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Natural Language Processing
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    24/7 Availability
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Multi-platform Integration
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Learning Capabilities
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="target" class="w-8 h-8 text-white"></i>
+                        </div>
+                        
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">Process Optimization</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Streamline operations and eliminate inefficiencies with AI-powered process automation.</p>
+                            
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Workflow Automation
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Performance Monitoring
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Resource Optimization
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Cost Reduction
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right">
+                    <div class="flex items-start space-x-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+                        </div>
+                        
+                        <div class="flex-1">
+                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">Business Intelligence</h3>
+                            <p class="text-gray-600 mb-6 leading-relaxed">Make data-driven decisions with comprehensive business intelligence solutions.</p>
+                            
+                            <ul class="space-y-2">
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Market Analysis
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Competitor Intelligence
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Trend Forecasting
+                                </li>
+                                <li class="flex items-center text-gray-700">
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    Strategic Planning
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-20 bg-white relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="slide-in-left">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                        About <span class="text-gradient animate-gradient">FineFlow AI</span>
+                    </h2>
+                    
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        We're a team of passionate AI experts, data scientists, and engineers dedicated to 
+                        helping businesses harness the power of artificial intelligence. Our mission is to 
+                        make advanced AI accessible, practical, and transformative for organizations of all sizes.
+                    </p>
+                    
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Founded in 2016, we've been at the forefront of AI innovation, working with startups 
+                        to Fortune 500 companies to implement intelligent solutions that drive real business value.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 mb-8">
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">8+</div>
+                            <div class="text-gray-600">Years of Experience</div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">500+</div>
+                            <div class="text-gray-600">AI Projects Delivered</div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">25+</div>
+                            <div class="text-gray-600">Countries Served</div>
+                        </div>
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">98%</div>
+                            <div class="text-gray-600">Client Satisfaction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-6 slide-in-right">
+                    <h3 class="text-2xl font-semibold mb-6 text-gray-900">Our Core Values</h3>
+                    
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="award" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Excellence</h4>
+                            <p class="text-gray-600">We strive for perfection in every AI solution we deliver.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="globe" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Global Impact</h4>
+                            <p class="text-gray-600">Making AI accessible to businesses worldwide.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="rocket" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Innovation</h4>
+                            <p class="text-gray-600">Pushing the boundaries of what's possible with AI.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Customer First</h4>
+                            <p class="text-gray-600">Your success is our primary motivation and measure of achievement.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                    What Our <span class="text-gradient animate-gradient">Clients Say</span>
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Don't just take our word for it. Here's what industry leaders say about 
+                    their experience with FineFlow AI.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover scale-in">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150" 
+                             alt="Sarah Johnson" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Sarah Johnson</h4>
+                            <p class="text-gray-600">CEO, TechVenture Inc.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                    </div>
+
+                    <div class="relative">
+                        <i data-lucide="quote" class="absolute -top-2 -left-2 w-8 h-8 text-blue-200"></i>
+                        <p class="text-gray-700 italic leading-relaxed pl-6">
+                            "FineFlow AI transformed our data analytics capabilities. We've seen a 300% improvement in decision-making speed and accuracy."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover scale-in">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.pexels.com/photos/1222271/pexels-photo-1222271.jpeg?auto=compress&cs=tinysrgb&w=150" 
+                             alt="Michael Chen" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Michael Chen</h4>
+                            <p class="text-gray-600">CTO, DataFlow Systems</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                    </div>
+
+                    <div class="relative">
+                        <i data-lucide="quote" class="absolute -top-2 -left-2 w-8 h-8 text-blue-200"></i>
+                        <p class="text-gray-700 italic leading-relaxed pl-6">
+                            "The automation solutions provided by FineFlow AI have revolutionized our operations, saving us over 40 hours per week."
+                        </p>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover scale-in">
+                    <div class="flex items-center mb-6">
+                        <img src="https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg?auto=compress&cs=tinysrgb&w=150" 
+                             alt="Emily Rodriguez" class="w-16 h-16 rounded-full object-cover mr-4">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900">Emily Rodriguez</h4>
+                            <p class="text-gray-600">Head of Operations, GrowthCorp</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-center mb-4">
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                        <i data-lucide="star" class="w-5 h-5 text-yellow-400 fill-current"></i>
+                    </div>
+
+                    <div class="relative">
+                        <i data-lucide="quote" class="absolute -top-2 -left-2 w-8 h-8 text-blue-200"></i>
+                        <p class="text-gray-700 italic leading-relaxed pl-6">
+                            "Outstanding support and incredible results. Our customer satisfaction increased by 45% after implementing their AI chatbot."
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 20%; top: 40%; animation-delay: 0.3s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 30%; top: 60%; animation-delay: 0.6s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 40%; top: 30%; animation-delay: 0.9s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 50%; top: 70%; animation-delay: 1.2s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 60%; top: 25%; animation-delay: 1.5s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 70%; top: 50%; animation-delay: 1.8s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 80%; top: 35%; animation-delay: 2.1s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 90%; top: 65%; animation-delay: 2.4s;"></div>
+        </div>
+
+        <div class="absolute top-20 left-10 w-24 h-24 border-2 border-white/20 rounded-full animate-rotate"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 border-2 border-white/20 rounded-lg animate-float"></div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="max-w-4xl mx-auto text-center fade-in">
+                <div class="flex justify-center mb-6">
+                    <i data-lucide="sparkles" class="w-12 h-12 text-white animate-rotate"></i>
+                </div>
+
+                <h2 class="text-4xl lg:text-5xl font-bold text-white mb-6">
+                    Ready to Transform Your Business with AI?
+                </h2>
+                
+                <p class="text-xl text-blue-100 mb-8 leading-relaxed">
+                    Join thousands of companies already using FineFlow AI to automate processes, 
+                    gain insights, and accelerate growth. Start your free trial today.
+                </p>
+
+                <div class="flex flex-wrap justify-center gap-6 mb-10">
+                    <div class="flex items-center text-white">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-green-300"></i>
+                        <span>Free 30-day trial</span>
+                    </div>
+                    <div class="flex items-center text-white">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-green-300"></i>
+                        <span>No setup fees</span>
+                    </div>
+                    <div class="flex items-center text-white">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-green-300"></i>
+                        <span>Cancel anytime</span>
+                    </div>
+                    <div class="flex items-center text-white">
+                        <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-green-300"></i>
+                        <span>24/7 support included</span>
+                    </div>
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all flex items-center justify-center btn-hover">
+                        <span>Start Free Trial</span>
+                        <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
+                    </button>
+                    
+                    <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-blue-600 transition-all btn-hover">
+                        <span>Schedule Demo</span>
+                    </button>
+                </div>
+
+                <p class="text-blue-100 mt-6 text-sm">
+                    No credit card required • Get started in under 5 minutes
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-6">
+            <div class="grid lg:grid-cols-5 gap-8 mb-12">
+                <div class="lg:col-span-2">
+                    <div class="flex items-center space-x-2 mb-6">
+                        <img src="images/logo.png" alt="FineFlowAI Logo" width="45">
+
+                        <span class="text-2xl font-bold">FineFlow AI</span>
+                    </div>
+                    <p class="text-gray-400 mb-6 leading-relaxed max-w-md">
+                        Empowering businesses with intelligent AI solutions. Transform your operations, 
+                        automate processes, and unlock new possibilities with our cutting-edge technology.
+                    </p>
+                    
+                    <div class="space-y-3">
+                        <div class="flex items-center text-gray-400">
+                            <i data-lucide="mail" class="w-5 h-5 mr-3"></i>
+                            <span>contact@fineflowai.com</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i data-lucide="phone" class="w-5 h-5 mr-3"></i>
+                            <span>+1 (555) 123-4567</span>
+                        </div>
+                        <div class="flex items-center text-gray-400">
+                            <i data-lucide="map-pin" class="w-5 h-5 mr-3"></i>
+                            <span>San Francisco, CA 94105</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Product</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">API Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Integrations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Security</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Company</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Partners</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Tutorials</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Case Studies</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">White Papers</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Webinars</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-gray-400 mb-4 md:mb-0">
+                        © 2025 FineFlow AI. All rights reserved.
+                    </div>
+                    
+                    <div class="flex items-center space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="twitter" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="linkedin" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i data-lucide="github" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 10) {
+                header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+            } else {
+                header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animation elements
+        document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add hover effects to navigation links
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+            
+            link.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Particle animation for hero section
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'absolute w-1 h-1 bg-blue-400 rounded-full opacity-30';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.top = '100%';
+            particle.style.animation = 'particle 4s ease-out forwards';
+            
+            document.querySelector('#home .absolute.inset-0').appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 4000);
+        }
+
+        // Create particles periodically
+        setInterval(createParticle, 500);
+
+        // Add dynamic gradient animation to text elements
+        document.querySelectorAll('.text-gradient').forEach(el => {
+            el.addEventListener('mouseenter', function() {
+                this.style.backgroundSize = '200% 200%';
+                this.style.animation = 'gradient 2s ease infinite';
+            });
+        });
+
+        // Enhanced button interactions
+        document.querySelectorAll('.btn-hover').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+                this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            });
+            
+            btn.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(-1px) scale(0.98)';
+            });
+            
+            btn.addEventListener('mouseup', function() {
+                this.style.transform = 'translateY(-3px) scale(1.05)';
+            });
+        });
+
+        // Card hover effects
+        document.querySelectorAll('.card-hover').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.boxShadow = '0 25px 50px rgba(0,0,0,0.15)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+                this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+            });
+        });
+
+        // Add parallax effect to background elements
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.animate-float');
+            
+            parallaxElements.forEach((element, index) => {
+                const speed = 0.5 + (index * 0.1);
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Enhanced scroll reveal animations
+        const revealElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+        
+        function checkReveal() {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', checkReveal);
+        checkReveal(); // Check on initial load
+    </script>
+</body>
+</html>
