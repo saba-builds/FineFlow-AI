@@ -131,6 +131,28 @@
             opacity: 1;
             transform: scale(1);
         }
+
+        /* Typing animation cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em; /* Adjust to match font size */
+            background-color: currentColor;
+            margin-left: 2px;
+            animation: blink-caret .75s step-end infinite;
+            vertical-align: middle; /* Align cursor vertically */
+        }
+
+        @keyframes blink-caret {
+            from, to { visibility: hidden; }
+            50% { visibility: visible; }
+        }
+
+        /* Ensure smooth word wrapping when whitespace-nowrap is not active */
+        .h1-typing-container {
+            word-break: break-word; /* Allows words to break if too long for the line */
+            overflow-wrap: break-word; /* Same as word-break, modern browsers */
+        }
     </style>
 </head>
 <body class="bg-white">
@@ -152,7 +174,10 @@
                 </nav>
 
                 <div class="hidden md:flex items-center space-x-4">
-                   
+                    <button class="text-gray-700 hover:text-blue-600 transition-colors btn-hover">Sign In</button>
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all btn-hover">
+                        Get Started
+                    </button>
                 </div>
 
                 <button id="mobile-menu-btn" class="md:hidden">
@@ -204,9 +229,8 @@
                             🚀 Next-Generation AI Solutions
                         </div>
                         
-                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight">
-                            Let Your Business Flow With
-                            <span class="text-gradient animate-gradient"> Fine Automations</span>
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight h1-typing-container">
+                            <span id="typing-text-full"></span><span class="typing-cursor"></span>
                         </h1>
                         
                         <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
@@ -242,7 +266,7 @@
                     <div id="image-carousel" class="relative z-10 bg-white rounded-2xl shadow-2xl transform card-hover overflow-hidden w-full aspect-video flex items-center justify-center">
                         <img src="images/logo1.png" alt="AI Interface 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
                         <img src="images/logo2.png" alt="AI Interface 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
-                        <img src="images/logo3.png" alt="AI Interface 3" class="absolute inset-0 w-auto h-auto object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                        <img src="images/logo3.png" alt="AI Interface 3" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         <img src="images/logo4.png" alt="AI Interface 4" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         <img src="images/logo5.png" alt="AI Interface 5" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         
@@ -514,7 +538,7 @@
                     <h3 class="text-2xl font-semibold mb-6 text-gray-900">Our Core Values</h3>
                     
                     <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                             <i data-lucide="award" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -524,7 +548,7 @@
                     </div>
 
                     <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                             <i data-lucide="globe" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -534,7 +558,7 @@
                     </div>
 
                     <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                             <i data-lucide="rocket" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -544,7 +568,7 @@
                     </div>
 
                     <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
                             <i data-lucide="heart" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -806,7 +830,6 @@
         const dots = carousel.querySelectorAll('.carousel-dot'); 
         let currentIndex = 0;
 
-        // Ensure that dots are selected within the carousel to avoid conflicts if you have other dots
         if (dots.length === 0 && images.length > 0) {
             const dotsContainer = carousel.querySelector('.absolute.bottom-4');
             if (dotsContainer) {
@@ -821,14 +844,11 @@
                     });
                     dotsContainer.appendChild(dotButton);
                 });
-                // Re-select dots after they are created
                 dots = carousel.querySelectorAll('.carousel-dot'); 
             }
         }
 
-
         function showImage(index) {
-            // Hide all images and deactivate all dots
             images.forEach(img => {
                 img.classList.remove('opacity-100');
                 img.classList.add('opacity-0');
@@ -838,7 +858,6 @@
                 dot.classList.add('bg-white/50');
             });
 
-            // Show the current image and activate the current dot
             images[index].classList.remove('opacity-0');
             images[index].classList.add('opacity-100');
             dots[index].classList.remove('bg-white/50');
@@ -850,26 +869,88 @@
             showImage(currentIndex);
         }
 
-        // Initial display
         showImage(currentIndex);
-
-        // Auto-slide every 5 seconds
         let carouselInterval = setInterval(nextImage, 5000);
 
-        // Add event listeners for dots (optional manual navigation) - already handled if dynamically created
-        // If dots are already in HTML, this block ensures they have listeners
         dots.forEach((dot, index) => {
-            // Only add if not already added by dynamic creation logic (safe to keep for manual HTML dots)
             if (!dot._hasClickListener) { 
                 dot.addEventListener('click', () => {
-                    clearInterval(carouselInterval); // Stop auto-slide on manual interaction
+                    clearInterval(carouselInterval);
                     currentIndex = index;
                     showImage(currentIndex);
-                    carouselInterval = setInterval(nextImage, 5000); // Resume auto-slide
+                    carouselInterval = setInterval(nextImage, 5000);
                 });
-                dot._hasClickListener = true; // Mark to prevent duplicate listeners
+                dot._hasClickListener = true;
             }
         });
+
+        // Full Typing Animation Logic (Revised)
+        const fullTypingTextElement = document.getElementById('typing-text-full');
+        // The full text to be typed, with a non-breaking space to keep "Flow With Fine" together
+        const fullTextToType = "Let Your Business Flow With Fine Automations"; 
+        const gradientStartWord = "Fine Automations";
+
+        let currentCharacterIndex = 0;
+        let isTyping = false;
+        const typingSpeed = 75; // milliseconds per character
+
+        function typeFullHeadline() {
+            if (currentCharacterIndex < fullTextToType.length) {
+                const char = fullTextToType.charAt(currentCharacterIndex);
+                
+                // Check if we are at the start of "Fine Automations"
+                if (fullTextToType.substring(currentCharacterIndex).startsWith(gradientStartWord)) {
+                    // Create a span for the gradient part
+                    const gradientSpan = document.createElement('span');
+                    gradientSpan.classList.add('text-gradient', 'animate-gradient');
+                    fullTypingTextElement.appendChild(gradientSpan);
+                    
+                    let gradientCharIndex = 0;
+                    function typeGradientPart() {
+                        if (gradientCharIndex < gradientStartWord.length) {
+                            gradientSpan.textContent += gradientStartWord.charAt(gradientCharIndex);
+                            gradientCharIndex++;
+                            setTimeout(typeGradientPart, typingSpeed);
+                        } else {
+                            // After typing gradient part, move the main index past it
+                            currentCharacterIndex += gradientStartWord.length;
+                            // And continue typing the rest of the main text (if any remains)
+                            if (currentCharacterIndex < fullTextToType.length) {
+                                setTimeout(typeFullHeadline, typingSpeed);
+                            }
+                        }
+                    }
+                    // Start typing the gradient part
+                    typeGradientPart();
+                    // Exit this iteration of the main loop, as gradient typing will self-manage
+                    return; 
+                } else {
+                    // Append regular characters
+                    fullTypingTextElement.textContent += char;
+                }
+                
+                currentCharacterIndex++;
+                setTimeout(typeFullHeadline, typingSpeed);
+            } else {
+                isTyping = false; // Animation complete
+            }
+        }
+
+        // Trigger typing effect when the element becomes visible
+        const headlineTypingObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !isTyping) {
+                    isTyping = true;
+                    fullTypingTextElement.textContent = ''; // Clear content before typing
+                    currentCharacterIndex = 0; // Reset index for re-typing
+                    typeFullHeadline();
+                    headlineTypingObserver.unobserve(entry.target); // Observe only once
+                }
+            });
+        }, { threshold: 0.8 }); // Adjust threshold as needed
+
+        headlineTypingObserver.observe(fullTypingTextElement);
+
     </script>
 </body>
 </html>
