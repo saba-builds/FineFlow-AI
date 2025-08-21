@@ -11,16 +11,29 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
-        /* Custom animations and styles */
+        /* Enhanced animations and styles */
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(20px) rotate(-5deg); }
         }
         
         @keyframes particle {
             0% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { opacity: 0.8; }
+            50% { opacity: 0.8; transform: scale(1.2); }
             100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+        }
+        
+        @keyframes particleFloat {
+            0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.4; }
+            25% { transform: translateY(-25px) translateX(10px) scale(1.1); opacity: 0.7; }
+            50% { transform: translateY(-50px) translateX(-5px) scale(1.3); opacity: 0.9; }
+            75% { transform: translateY(-75px) translateX(15px) scale(1.1); opacity: 0.5; }
+            100% { transform: translateY(-100px) translateX(0) scale(0.8); opacity: 0; }
         }
         
         @keyframes rotate {
@@ -28,26 +41,80 @@
             to { transform: rotate(360deg); }
         }
         
+        @keyframes rotateReverse {
+            from { transform: rotate(360deg); }
+            to { transform: rotate(0deg); }
+        }
+        
         @keyframes gradient {
             0%, 100% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
         }
         
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            50% { transform: scale(1.05); opacity: 1; }
+        }
+        
+        @keyframes slideInUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInDown {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideInLeft {
+            from { transform: translateX(-60px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes slideInRight {
+            from { transform: translateX(60px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.3); opacity: 0; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            70% { transform: scale(0.9); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
         .animate-float {
-            animation: float 3s ease-in-out infinite;
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .animate-float-reverse {
+            animation: floatReverse 5s ease-in-out infinite;
         }
         
         .animate-particle {
-            animation: particle 3s ease-out infinite;
+            animation: particleFloat 4s ease-out infinite;
         }
         
         .animate-rotate {
-            animation: rotate 8s linear infinite;
+            animation: rotate 10s linear infinite;
+        }
+        
+        .animate-rotate-reverse {
+            animation: rotateReverse 8s linear infinite;
         }
         
         .animate-gradient {
             background-size: 200% 200%;
             animation: gradient 3s ease infinite;
+        }
+        
+        .animate-pulse-custom {
+            animation: pulse 2s ease-in-out infinite;
         }
         
         .glass {
@@ -57,28 +124,46 @@
         }
         
         .card-hover {
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .card-hover:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+            transform: translateY(-15px) scale(1.03) rotateX(5deg);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
         }
         
         .btn-hover {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-hover:hover::before {
+            left: 100%;
         }
         
         .btn-hover:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
         }
         
         .text-gradient {
-            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            background-size: 200% 200%;
         }
         
         .bg-gradient-animated {
@@ -87,11 +172,11 @@
             animation: gradient 4s ease infinite;
         }
         
-        /* Scroll animations */
+        /* Enhanced scroll animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .fade-in.visible {
@@ -101,8 +186,8 @@
         
         .slide-in-left {
             opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.8s ease;
+            transform: translateX(-60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .slide-in-left.visible {
@@ -112,8 +197,8 @@
         
         .slide-in-right {
             opacity: 0;
-            transform: translateX(50px);
-            transition: all 0.8s ease;
+            transform: translateX(60px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .slide-in-right.visible {
@@ -123,8 +208,8 @@
         
         .scale-in {
             opacity: 0;
-            transform: scale(0.9);
-            transition: all 0.8s ease;
+            transform: scale(0.8);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .scale-in.visible {
@@ -135,12 +220,17 @@
         /* Typing animation cursor */
         .typing-cursor {
             display: inline-block;
-            width: 2px;
-            height: 1.2em; /* Adjust to match font size */
+            width: 3px;
+            height: 1.2em;
             background-color: currentColor;
-            margin-left: 2px;
+            margin-left: 3px;
+            vertical-align: middle;
             animation: blink-caret .75s step-end infinite;
-            vertical-align: middle; /* Align cursor vertically */
+            visibility: hidden;
+        }
+
+        .typing-cursor.is-typing {
+            visibility: visible;
         }
 
         @keyframes blink-caret {
@@ -148,20 +238,89 @@
             50% { visibility: visible; }
         }
 
-        /* Ensure smooth word wrapping when whitespace-nowrap is not active */
         .h1-typing-container {
-            word-break: break-word; /* Allows words to break if too long for the line */
-            overflow-wrap: break-word; /* Same as word-break, modern browsers */
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Enhanced hover effects */
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Staggered animation delays */
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        .stagger-5 { animation-delay: 0.5s; }
+        .stagger-6 { animation-delay: 0.6s; }
+        
+        /* Enhanced background animations */
+        .bg-animated {
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        /* Parallax effect */
+        .parallax {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        /* Smooth transitions for all interactive elements */
+        * {
+            transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(45deg, #2563eb, #7c3aed);
+        }
+
+        /* Justify text */
+        .text-justify {
+            text-align: justify;
         }
     </style>
 </head>
 <body class="bg-white">
-    <header id="header" class="fixed w-full z-50 transition-all duration-300">
+    <header id="header" class="fixed w-full z-50 transition-all duration-500">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
-                    <img src="images/logo.png" alt="FineFlow AI Logo" width="35">
-
+                    <img src="images/logo.png" alt="FineFlow AI Logo" width="35" class="animate-pulse-custom">
                     <span class="text-2xl font-bold text-gradient animate-gradient">FineFlow AI</span>
                 </div>
 
@@ -174,13 +333,10 @@
                 </nav>
 
                 <div class="hidden md:flex items-center space-x-4">
-                    <button class="text-gray-700 hover:text-blue-600 transition-colors btn-hover">Sign In</button>
-                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all btn-hover">
-                        Get Started
-                    </button>
+                    
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden">
+                <button id="mobile-menu-btn" class="md:hidden btn-hover">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
@@ -205,57 +361,57 @@
 
     <section id="home" class="min-h-screen flex items-center pt-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
         <div class="absolute inset-0 overflow-hidden">
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 20%; top: 40%; animation-delay: 0.5s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 30%; top: 60%; animation-delay: 1s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 40%; top: 30%; animation-delay: 1.5s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 50%; top: 70%; animation-delay: 2s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 60%; top: 25%; animation-delay: 2.5s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 70%; top: 50%; animation-delay: 3s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 80%; top: 35%; animation-delay: 3.5s;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle" style="left: 90%; top: 65%; animation-delay: 4s;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-1" style="left: 10%; top: 20%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-2" style="left: 20%; top: 40%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-3" style="left: 30%; top: 60%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-4" style="left: 40%; top: 30%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-5" style="left: 50%; top: 70%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-6" style="left: 60%; top: 25%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-1" style="left: 70%; top: 50%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-2" style="left: 80%; top: 35%;"></div>
+            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-3" style="left: 90%; top: 65%;"></div>
         </div>
 
         <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
-        <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg opacity-20 animate-float" style="animation-delay: 1s;"></div>
-        <div class="absolute bottom-40 left-20 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-20 animate-float" style="animation-delay: 2s;"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg opacity-20 animate-float-reverse"></div>
+        <div class="absolute bottom-40 left-20 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-20 animate-float"></div>
 
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8 slide-in-left">
                     <div class="space-y-6">
-                        <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium">
+                        <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium animate-pulse-custom">
                             <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
-                            🚀 Next-Generation AI Solutions
+                            Next-Generation AI Solutions
                         </div>
                         
                         <h1 class="text-5xl lg:text-7xl font-bold leading-tight h1-typing-container">
-                            <span id="typing-text-full"></span><span class="typing-cursor"></span>
+                            Let Your Business Flow With <span class="text-gradient animate-gradient">Fine Automations</span>
                         </h1>
                         
-                        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl">
+                        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl fade-in">
                             Transform your operations with our cutting-edge AI platform. Automate processes, 
                             gain insights, and accelerate growth with intelligent solutions tailored for your business.
                         </p>
                     </div>
 
-                    <div class="flex flex-col sm:flex-row gap-4">
+                    <div class="flex flex-col sm:flex-row gap-4 fade-in">
                         <button class="bg-gradient-animated text-white px-8 py-4 rounded-full hover:shadow-2xl transition-all flex items-center justify-center btn-hover">
                             <span>Apply Now</span>
                             <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
                         </button>
                     </div>
 
-                    <div class="flex items-center space-x-8 pt-8">
-                        <div class="text-center">
+                    <div class="flex items-center space-x-8 pt-8 fade-in">
+                        <div class="text-center scale-in stagger-1">
                             <div class="text-3xl font-bold text-gray-900">50K+</div>
                             <div class="text-gray-600">Active Users</div>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center scale-in stagger-2">
                             <div class="text-3xl font-bold text-gray-900">99.9%</div>
                             <div class="text-gray-600">Uptime</div>
                         </div>
-                        <div class="text-center">
+                        <div class="text-center scale-in stagger-3">
                             <div class="text-3xl font-bold text-gray-900">24/7</div>
                             <div class="text-gray-600">Support</div>
                         </div>
@@ -280,13 +436,18 @@
                     </div>
                     
                     <div class="absolute -top-4 -right-4 w-72 h-72 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl opacity-20 animate-float"></div>
-                    <div class="absolute -bottom-4 -left-4 w-64 h-64 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-20 animate-float" style="animation-delay: 1s;"></div>
+                    <div class="absolute -bottom-4 -left-4 w-64 h-64 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-20 animate-float-reverse"></div>
                 </div>
             </div>
         </div>
     </section>
 
     <section id="features" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full opacity-50 animate-float"></div>
+            <div class="absolute bottom-20 right-10 w-24 h-24 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full opacity-50 animate-float-reverse"></div>
+        </div>
+        
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6">
@@ -300,48 +461,48 @@
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-1">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
                         <i data-lucide="brain" class="w-7 h-7 text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">AI Outbound Campaigns</h3>
                     <p class="text-gray-600 leading-relaxed">AI-powered personalization that resonates with prospects.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-2">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
                         <i data-lucide="zap" class="w-7 h-7 text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">Targeted Messaging</h3>
                     <p class="text-gray-600 leading-relaxed">AI-powered personalization that resonates with prospects.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-3">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
                         <i data-lucide="shield" class="w-7 h-7 text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">Market Fit Discovery</h3>
                     <p class="text-gray-600 leading-relaxed">Rapid testing to identify your most receptive customers.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-4">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
                         <i data-lucide="bar-chart" class="w-7 h-7 text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">AI Workflows</h3>
                     <p class="text-gray-600 leading-relaxed">Custom automation that eliminates manual tasks completely.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-5">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
                         <i data-lucide="settings" class="w-7 h-7 text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">Custom Interfaces</h3>
                     <p class="text-gray-600 leading-relaxed">Intuitive dashboards with real-time monitoring and control.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
+                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-6">
+                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
                         <i data-lucide="users" class="w-7 h-7 text-white"></i>
                     </div>
                     <h3 class="text-xl font-semibold mb-4 text-gray-900">Sales Administration</h3>
@@ -352,6 +513,11 @@
     </section>
 
     <section id="services" class="py-20 bg-gray-50 relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full opacity-20 blur-3xl animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full opacity-20 blur-3xl animate-float-reverse"></div>
+        </div>
+        
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 fade-in">
                 <h2 class="text-4xl lg:text-5xl font-bold mb-6">
@@ -364,9 +530,9 @@
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left stagger-1">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="database" class="w-8 h-8 text-white"></i>
                         </div>
                         
@@ -376,19 +542,19 @@
                             
                             <ul class="space-y-2">
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     AI Cold Email Systems
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Application Systems
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Content Systems
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Automated Reports
                                 </li>
                             </ul>
@@ -396,9 +562,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right stagger-2">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="message-square" class="w-8 h-8 text-white"></i>
                         </div>
                         
@@ -408,19 +574,19 @@
                             
                             <ul class="space-y-2">
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Natural Language Processing
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     24/7 Availability
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Multi-platform Integration
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Learning Capabilities
                                 </li>
                             </ul>
@@ -428,9 +594,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left stagger-3">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="target" class="w-8 h-8 text-white"></i>
                         </div>
                         
@@ -440,19 +606,19 @@
                             
                             <ul class="space-y-2">
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Drag-and-drop builders
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Real-time monitoring
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Role-based access control
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Cost Reduction
                                 </li>
                             </ul>
@@ -460,9 +626,9 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right">
+                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right stagger-4">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
                         </div>
                         
@@ -472,19 +638,19 @@
                             
                             <ul class="space-y-2">
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Analysis
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     ChatGPT integration
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Predictive analytics
                                 </li>
                                 <li class="flex items-center text-gray-700">
-                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3"></div>
+                                    <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Intelligent decision-making
                                 </li>
                             </ul>
@@ -496,40 +662,48 @@
     </section>
 
     <section id="about" class="py-20 bg-white relative overflow-hidden">
+        <div class="absolute inset-0">
+            <div class="absolute top-1/4 left-0 w-64 h-64 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full opacity-30 blur-2xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-0 w-48 h-48 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full opacity-30 blur-2xl animate-float-reverse"></div>
+        </div>
+        
         <div class="container mx-auto px-6 relative z-10">
-            <div class="grid lg:grid-cols-2 gap-16 items-center">
+            <div class="grid lg:grid-cols-2 gap-16 items-start">
                 <div class="slide-in-left">
                     <h2 class="text-4xl lg:text-5xl font-bold mb-6">
                         About <span class="text-gradient animate-gradient">FineFlow AI</span>
                     </h2>
                     
-                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
-                        We're a team of passionate AI experts, data scientists, and engineers dedicated to 
-                        helping businesses harness the power of artificial intelligence. Our mission is to 
-                        make advanced AI accessible, practical, and transformative for organizations of all sizes.
-                    </p>
+                    <div class="space-y-6 mb-8">
+                        <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                            At FineFlow AI, we help businesses work smarter, not harder. As a specialized AI automation agency, we design and implement intelligent workflows that save time, cut costs, and boost efficiency. Using powerful platforms like n8n, we connect your tools, automate repetitive tasks, and create seamless processes that let your team focus on what truly matters: growth and innovation.
+                        </p>
+                        
+                        <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                            Whether it's streamlining operations, integrating apps, or building custom AI-powered solutions, we ensure every workflow runs with precision and reliability.
+                        </p>
+                        
+                        <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                            Our mission is simple: Turn complexity into clarity through automation. With FineFlow AI, your business doesn't just keep up, it stays ahead.
+                        </p>
+                    </div>
                     
-                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
-                        Founded in 2016, we've been at the forefront of AI innovation, working with startups 
-                        to Fortune 500 companies to implement intelligent solutions that drive real business value.
-                    </p>
-
-                    <div class="grid grid-cols-2 gap-6 mb-8">
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">8+</div>
+                    <div class="grid grid-cols-2 gap-6">
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-1">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">2+</div>
                             <div class="text-gray-600">Years of Experience</div>
                         </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">500+</div>
-                            <div class="text-gray-600">AI Projects Delivered</div>
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-2">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">100+</div>
+                            <div class="text-gray-600">AI Systems</div>
                         </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">25+</div>
-                            <div class="text-gray-600">Countries Served</div>
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-3">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">90%</div>
+                            <div class="text-gray-600">Time Saved</div>
                         </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">98%</div>
-                            <div class="text-gray-600">Client Satisfaction</div>
+                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-4">
+                            <div class="text-3xl font-bold text-gray-900 mb-2">80%</div>
+                            <div class="text-gray-600">Growth</div>
                         </div>
                     </div>
                 </div>
@@ -537,8 +711,8 @@
                 <div class="space-y-6 slide-in-right">
                     <h3 class="text-2xl font-semibold mb-6 text-gray-900">Our Core Values</h3>
                     
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-1">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="award" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -547,8 +721,8 @@
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-2">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="globe" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -557,8 +731,8 @@
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-3">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="rocket" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -567,8 +741,8 @@
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
                             <i data-lucide="heart" class="w-6 h-6 text-white"></i>
                         </div>
                         <div>
@@ -583,19 +757,19 @@
 
     <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 10%; top: 20%; animation-delay: 0s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 20%; top: 40%; animation-delay: 0.3s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 30%; top: 60%; animation-delay: 0.6s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 40%; top: 30%; animation-delay: 0.9s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 50%; top: 70%; animation-delay: 1.2s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 60%; top: 25%; animation-delay: 1.5s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 70%; top: 50%; animation-delay: 1.8s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 80%; top: 35%; animation-delay: 2.1s;"></div>
-            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle" style="left: 90%; top: 65%; animation-delay: 2.4s;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-1" style="left: 10%; top: 20%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-2" style="left: 20%; top: 40%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-3" style="left: 30%; top: 60%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-4" style="left: 40%; top: 30%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-5" style="left: 50%; top: 70%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-6" style="left: 60%; top: 25%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-1" style="left: 70%; top: 50%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-2" style="left: 80%; top: 35%;"></div>
+            <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-3" style="left: 90%; top: 65%;"></div>
         </div>
 
         <div class="absolute top-20 left-10 w-24 h-24 border-2 border-white/20 rounded-full animate-rotate"></div>
-        <div class="absolute bottom-20 right-10 w-16 h-16 border-2 border-white/20 rounded-lg animate-float"></div>
+        <div class="absolute bottom-20 right-10 w-16 h-16 border-2 border-white/20 rounded-lg animate-rotate-reverse"></div>
 
         <div class="container mx-auto px-6 relative z-10">
             <div class="max-w-4xl mx-auto text-center fade-in">
@@ -623,10 +797,10 @@
 
     <footer id="contact" class="bg-gray-900 text-white py-16">
         <div class="container mx-auto px-6">
-            <div class="grid lg:grid-cols-5 gap-8 mb-12">
-                <div class="lg:col-span-5 flex flex-col items-center text-center">
+            <div class="grid lg:grid-cols-1 gap-8 mb-12">
+                <div class="flex flex-col items-center text-center"> 
                     <div class="flex items-center space-x-2 mb-6 justify-center">
-                        <img src="images/logo.png" alt="FineFlowAI Logo" width="45">
+                        <img src="images/logo.png" alt="FineFlowAI Logo" width="45" class="animate-pulse-custom">
                         <span class="text-2xl font-bold">FineFlow AI</span>
                     </div>
                     <p class="text-gray-400 mb-6 leading-relaxed max-w-md mx-auto">
@@ -654,13 +828,13 @@
                     </div>
                     
                     <div class="flex items-center space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors btn-hover">
                             <i data-lucide="twitter" class="w-5 h-5"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors btn-hover">
                             <i data-lucide="youtube" class="w-5 h-5"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors btn-hover">
                             <i data-lucide="instagram" class="w-5 h-5"></i>
                         </a>
                     </div>
@@ -681,14 +855,15 @@
             mobileMenu.classList.toggle('hidden');
         });
 
-        // Header scroll effect
+        // Enhanced header scroll effect
         const header = document.getElementById('header');
         
         window.addEventListener('scroll', () => {
             if (window.scrollY > 10) {
-                header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+                header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-lg');
+                header.style.transform = 'translateY(0)';
             } else {
-                header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-sm');
+                header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-lg');
             }
         });
 
@@ -706,16 +881,24 @@
             });
         });
 
-        // Scroll animations
+        // Enhanced scroll animations
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('visible');
+                    
+                    // Add staggered animation for child elements
+                    const staggeredElements = entry.target.querySelectorAll('.stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5, .stagger-6');
+                    staggeredElements.forEach((el, index) => {
+                        setTimeout(() => {
+                            el.classList.add('visible');
+                        }, index * 100);
+                    });
                 }
             });
         }, observerOptions);
@@ -725,48 +908,48 @@
             observer.observe(el);
         });
 
-        // Add hover effects to navigation links
+        // Enhanced navigation link effects
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
+                this.style.transform = 'translateY(-3px) scale(1.05)';
             });
             
             link.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+                this.style.transform = 'translateY(0) scale(1)';
             });
         });
 
-        // Particle animation for hero section
-        function createParticle() {
+        // Enhanced particle animation
+        function createAdvancedParticle() {
             const particle = document.createElement('div');
-            particle.className = 'absolute w-1 h-1 bg-blue-400 rounded-full opacity-30';
+            const size = Math.random() * 3 + 1;
+            particle.className = 'absolute bg-blue-400 rounded-full opacity-30';
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
             particle.style.left = Math.random() * 100 + '%';
             particle.style.top = '100%';
-            particle.style.animation = 'particle 4s ease-out forwards';
+            particle.style.animation = `particleFloat ${3 + Math.random() * 2}s ease-out forwards`;
             
-            document.querySelector('#home .absolute.inset-0').appendChild(particle);
-            
-            setTimeout(() => {
-                particle.remove();
-            }, 4000);
+            const heroSection = document.querySelector('#home .absolute.inset-0');
+            if (heroSection) {
+                heroSection.appendChild(particle);
+                
+                setTimeout(() => {
+                    if (particle.parentNode) {
+                        particle.remove();
+                    }
+                }, 5000);
+            }
         }
 
-        // Create particles periodically
-        setInterval(createParticle, 500);
-
-        // Add dynamic gradient animation to text elements
-        document.querySelectorAll('.text-gradient').forEach(el => {
-            el.addEventListener('mouseenter', function() {
-                this.style.backgroundSize = '200% 200%';
-                this.style.animation = 'gradient 2s ease infinite';
-            });
-        });
+        // Create particles more frequently
+        setInterval(createAdvancedParticle, 300);
 
         // Enhanced button interactions
         document.querySelectorAll('.btn-hover').forEach(btn => {
             btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-                this.style.boxShadow = '0 15px 35px rgba(0,0,0,0.2)';
+                this.style.transform = 'translateY(-4px) scale(1.08)';
+                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.3)';
             });
             
             btn.addEventListener('mouseleave', function() {
@@ -775,45 +958,46 @@
             });
             
             btn.addEventListener('mousedown', function() {
-                this.style.transform = 'translateY(-1px) scale(0.98)';
+                this.style.transform = 'translateY(-2px) scale(1.05)';
             });
             
             btn.addEventListener('mouseup', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
+                this.style.transform = 'translateY(-4px) scale(1.08)';
             });
         });
 
-        // Card hover effects
+        // Enhanced card hover effects
         document.querySelectorAll('.card-hover').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-                this.style.boxShadow = '0 25px 50px rgba(0,0,0,0.15)';
+                this.style.transform = 'translateY(-15px) scale(1.03) rotateX(5deg)';
+                this.style.boxShadow = '0 30px 60px rgba(0,0,0,0.2)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
                 this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
             });
         });
 
-        // Add parallax effect to background elements
+        // Enhanced parallax effect
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.animate-float');
+            const parallaxElements = document.querySelectorAll('.animate-float, .animate-float-reverse');
             
             parallaxElements.forEach((element, index) => {
-                const speed = 0.5 + (index * 0.1);
-                element.style.transform = `translateY(${scrolled * speed}px)`;
+                const speed = 0.3 + (index * 0.05);
+                const yPos = -(scrolled * speed);
+                element.style.transform = `translate3d(0, ${yPos}px, 0)`;
             });
         });
 
         // Enhanced scroll reveal animations
-        const revealElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
-        
         function checkReveal() {
+            const revealElements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in');
+            
             revealElements.forEach(element => {
                 const elementTop = element.getBoundingClientRect().top;
-                const elementVisible = 150;
+                const elementVisible = 100;
                 
                 if (elementTop < window.innerHeight - elementVisible) {
                     element.classList.add('visible');
@@ -822,46 +1006,29 @@
         }
 
         window.addEventListener('scroll', checkReveal);
-        checkReveal(); // Check on initial load
+        checkReveal();
 
-        // Image Carousel Logic
+        // Enhanced Image Carousel Logic
         const carousel = document.getElementById('image-carousel');
         const images = carousel.querySelectorAll('img');
         const dots = carousel.querySelectorAll('.carousel-dot'); 
         let currentIndex = 0;
 
-        if (dots.length === 0 && images.length > 0) {
-            const dotsContainer = carousel.querySelector('.absolute.bottom-4');
-            if (dotsContainer) {
-                images.forEach((_, index) => {
-                    const dotButton = document.createElement('button');
-                    dotButton.classList.add('carousel-dot', 'w-3', 'h-3', 'bg-white/50', 'rounded-full', 'focus:outline-none', 'transition-all', 'duration-300');
-                    dotButton.addEventListener('click', () => {
-                        clearInterval(carouselInterval);
-                        currentIndex = index;
-                        showImage(currentIndex);
-                        carouselInterval = setInterval(nextImage, 5000);
-                    });
-                    dotsContainer.appendChild(dotButton);
-                });
-                dots = carousel.querySelectorAll('.carousel-dot'); 
-            }
-        }
-
         function showImage(index) {
-            images.forEach(img => {
-                img.classList.remove('opacity-100');
-                img.classList.add('opacity-0');
+            images.forEach((img, i) => {
+                img.style.opacity = i === index ? '1' : '0';
+                img.style.transform = i === index ? 'scale(1)' : 'scale(1.05)';
             });
-            dots.forEach(dot => {
-                dot.classList.remove('bg-white', 'scale-125');
-                dot.classList.add('bg-white/50');
+            
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-white/50');
+                    dot.classList.add('bg-white', 'scale-125');
+                } else {
+                    dot.classList.remove('bg-white', 'scale-125');
+                    dot.classList.add('bg-white/50');
+                }
             });
-
-            images[index].classList.remove('opacity-0');
-            images[index].classList.add('opacity-100');
-            dots[index].classList.remove('bg-white/50');
-            dots[index].classList.add('bg-white', 'scale-125');
         }
 
         function nextImage() {
@@ -870,86 +1037,28 @@
         }
 
         showImage(currentIndex);
-        let carouselInterval = setInterval(nextImage, 5000);
+        let carouselInterval = setInterval(nextImage, 4000);
 
         dots.forEach((dot, index) => {
-            if (!dot._hasClickListener) { 
-                dot.addEventListener('click', () => {
-                    clearInterval(carouselInterval);
-                    currentIndex = index;
-                    showImage(currentIndex);
-                    carouselInterval = setInterval(nextImage, 5000);
-                });
-                dot._hasClickListener = true;
-            }
+            dot.addEventListener('click', () => {
+                clearInterval(carouselInterval);
+                currentIndex = index;
+                showImage(currentIndex);
+                carouselInterval = setInterval(nextImage, 4000);
+            });
         });
 
-        // Full Typing Animation Logic (Revised)
-        const fullTypingTextElement = document.getElementById('typing-text-full');
-        // The full text to be typed, with a non-breaking space to keep "Flow With Fine" together
-        const fullTextToType = "Let Your Business Flow With Fine Automations"; 
-        const gradientStartWord = "Fine Automations";
+        // Removed the typing animation script logic
+        // The H1 element is now set directly.
 
-        let currentCharacterIndex = 0;
-        let isTyping = false;
-        const typingSpeed = 75; // milliseconds per character
-
-        function typeFullHeadline() {
-            if (currentCharacterIndex < fullTextToType.length) {
-                const char = fullTextToType.charAt(currentCharacterIndex);
-                
-                // Check if we are at the start of "Fine Automations"
-                if (fullTextToType.substring(currentCharacterIndex).startsWith(gradientStartWord)) {
-                    // Create a span for the gradient part
-                    const gradientSpan = document.createElement('span');
-                    gradientSpan.classList.add('text-gradient', 'animate-gradient');
-                    fullTypingTextElement.appendChild(gradientSpan);
-                    
-                    let gradientCharIndex = 0;
-                    function typeGradientPart() {
-                        if (gradientCharIndex < gradientStartWord.length) {
-                            gradientSpan.textContent += gradientStartWord.charAt(gradientCharIndex);
-                            gradientCharIndex++;
-                            setTimeout(typeGradientPart, typingSpeed);
-                        } else {
-                            // After typing gradient part, move the main index past it
-                            currentCharacterIndex += gradientStartWord.length;
-                            // And continue typing the rest of the main text (if any remains)
-                            if (currentCharacterIndex < fullTextToType.length) {
-                                setTimeout(typeFullHeadline, typingSpeed);
-                            }
-                        }
-                    }
-                    // Start typing the gradient part
-                    typeGradientPart();
-                    // Exit this iteration of the main loop, as gradient typing will self-manage
-                    return; 
-                } else {
-                    // Append regular characters
-                    fullTypingTextElement.textContent += char;
-                }
-                
-                currentCharacterIndex++;
-                setTimeout(typeFullHeadline, typingSpeed);
-            } else {
-                isTyping = false; // Animation complete
-            }
-        }
-
-        // Trigger typing effect when the element becomes visible
-        const headlineTypingObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !isTyping) {
-                    isTyping = true;
-                    fullTypingTextElement.textContent = ''; // Clear content before typing
-                    currentCharacterIndex = 0; // Reset index for re-typing
-                    typeFullHeadline();
-                    headlineTypingObserver.unobserve(entry.target); // Observe only once
-                }
-            });
-        }, { threshold: 0.8 }); // Adjust threshold as needed
-
-        headlineTypingObserver.observe(fullTypingTextElement);
+        // Add loading animation
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s ease-in-out';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+        });
 
     </script>
 </body>
