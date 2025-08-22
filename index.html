@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FineFlow AI - Scale Your Business with Smart AI</title>
+    <title>FineFlow AI</title>
+    <link rel="icon" type="image/png" href="images/logo.png">
     <meta name="description" content="Transform your operations with cutting-edge AI platform. Automate processes, gain insights, and accelerate growth with intelligent solutions.">
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -11,6 +12,27 @@
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
+        /* Dark theme color variables */
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --bg-tertiary: #1a1a1a;
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-pink: #ec4899;
+            --border-color: #27272a;
+            --card-bg: #18181b;
+            --card-hover: #27272a;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+        }
+
         /* Enhanced animations and styles */
         @keyframes float {
             0%, 100% { transform: translateY(0px) rotate(0deg); }
@@ -87,6 +109,11 @@
             70% { transform: scale(0.9); opacity: 0.9; }
             100% { transform: scale(1); opacity: 1; }
         }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.5); }
+        }
         
         .animate-float {
             animation: float 4s ease-in-out infinite;
@@ -116,20 +143,34 @@
         .animate-pulse-custom {
             animation: pulse 2s ease-in-out infinite;
         }
+
+        .animate-glow {
+            animation: glow 3s ease-in-out infinite;
+        }
         
         .glass {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-dark {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .card-hover {
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
         }
         
         .card-hover:hover {
-            transform: translateY(-15px) scale(1.03) rotateX(5deg);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+            transform: translateY(-2px) scale(1.005) rotateX(1deg);
+            box-shadow: 0 5px 10px rgba(59, 130, 246, 0.05);
+            background: var(--card-hover);
+            border-color: rgba(59, 130, 246, 0.05);
         }
         
         .btn-hover {
@@ -155,7 +196,7 @@
         
         .btn-hover:hover {
             transform: translateY(-3px) scale(1.05);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 15px 35px rgba(59, 130, 246, 0.4);
         }
         
         .text-gradient {
@@ -170,6 +211,14 @@
             background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
             background-size: 400% 400%;
             animation: gradient 4s ease infinite;
+        }
+
+        .bg-dark-gradient {
+            background: linear-gradient(135deg, #0a0a0a 0%, #111111 50%, #1a1a1a 100%);
+        }
+
+        .bg-dark-card {
+            background: linear-gradient(135deg, #18181b 0%, #27272a 100%);
         }
         
         /* Enhanced scroll animations */
@@ -247,6 +296,11 @@
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .nav-link:hover {
+            color: var(--text-primary);
         }
         
         .nav-link::after {
@@ -275,7 +329,7 @@
         
         /* Enhanced background animations */
         .bg-animated {
-            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background: linear-gradient(-45deg, #1e1b4b, #312e81, #1e40af, #1d4ed8);
             background-size: 400% 400%;
             animation: gradient 15s ease infinite;
         }
@@ -297,7 +351,7 @@
         }
         
         ::-webkit-scrollbar-track {
-            background: #f1f1f1;
+            background: var(--bg-secondary);
         }
         
         ::-webkit-scrollbar-thumb {
@@ -313,10 +367,57 @@
         .text-justify {
             text-align: justify;
         }
+
+        /* Dark theme specific styles */
+        .dark-section {
+            background: var(--bg-primary);
+        }
+
+        .dark-section-alt {
+            background: var(--bg-secondary);
+        }
+
+        .dark-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+        }
+
+        .dark-card:hover {
+            background: var(--card-hover);
+            border-color: rgba(59, 130, 246, 0.3);
+        }
+
+        .text-primary-dark {
+            color: var(--text-primary);
+        }
+
+        .text-secondary-dark {
+            color: var(--text-secondary);
+        }
+
+        .text-muted-dark {
+            color: var(--text-muted);
+        }
+
+        /* Neon glow effects */
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+        }
+
+        .neon-glow:hover {
+            box-shadow: 0 0 40px rgba(139, 92, 246, 0.5);
+        }
+
+        /* Enhanced particle effects for dark theme */
+        .dark-particle {
+            background: linear-gradient(45deg, #3b82f6, #8b5cf6, #ec4899);
+            border-radius: 50%;
+            filter: blur(1px);
+        }
     </style>
 </head>
-<body class="bg-white">
-    <header id="header" class="fixed w-full z-50 transition-all duration-500">
+<body class="bg-black">
+    <header id="header" class="fixed w-full z-50 transition-all duration-500 glass-dark">
         <div class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
                 <div class="flex items-center space-x-2">
@@ -325,235 +426,228 @@
                 </div>
 
                 <nav class="hidden md:flex items-center space-x-8">
-                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Home</a>
-                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Features</a>
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Services</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">About</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors relative nav-link">Contact</a>
+                    <a href="#home" class="nav-link">Home</a>
+                    <a href="#features" class="nav-link">Features</a>
+                    <a href="#services" class="nav-link">Services</a>
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#contact" class="nav-link">Contact</a>
                 </nav>
 
                 <div class="hidden md:flex items-center space-x-4">
                     
                 </div>
 
-                <button id="mobile-menu-btn" class="md:hidden btn-hover">
+                <button id="mobile-menu-btn" class="md:hidden btn-hover text-white">
                     <i data-lucide="menu" class="w-6 h-6"></i>
                 </button>
             </div>
 
-            <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden">
-                <nav class="flex flex-col space-y-4">
-                    <a href="#home" class="text-gray-700 hover:text-blue-600 transition-colors">Home</a>
-                    <a href="#features" class="text-gray-700 hover:text-blue-600 transition-colors">Features</a>
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 transition-colors">Services</a>
-                    <a href="#about" class="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 transition-colors">Contact</a>
+            <div id="mobile-menu" class="md:hidden mt-4 pb-4 hidden glass-dark rounded-lg">
+                <nav class="flex flex-col space-y-4 p-4">
+                    <a href="#home" class="text-gray-300 hover:text-white transition-colors">Home</a>
+                    <a href="#features" class="text-gray-300 hover:text-white transition-colors">Features</a>
+                    <a href="#services" class="text-gray-300 hover:text-white transition-colors">Services</a>
+                    <a href="#about" class="text-gray-300 hover:text-white transition-colors">About</a>
+                    <a href="#contact" class="text-gray-300 hover:text-white transition-colors">Contact</a>
                 </nav>
-                <div class="flex flex-col space-y-2 mt-4">
-                    <button class="text-gray-700 hover:text-blue-600 transition-colors text-left">Sign In</button>
-                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full hover:shadow-lg transition-all">
-                        Get Started
-                    </button>
-                </div>
             </div>
         </div>
     </header>
 
-    <section id="home" class="min-h-screen flex items-center pt-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 relative overflow-hidden">
+    <section id="home" class="min-h-screen flex items-center pt-20 bg-gradient-to-br from-gray-900 via-black to-gray-800 relative overflow-hidden">
         <div class="absolute inset-0 overflow-hidden">
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-1" style="left: 10%; top: 20%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-2" style="left: 20%; top: 40%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-3" style="left: 30%; top: 60%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-4" style="left: 40%; top: 30%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-5" style="left: 50%; top: 70%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-6" style="left: 60%; top: 25%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-1" style="left: 70%; top: 50%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-2" style="left: 80%; top: 35%;"></div>
-            <div class="particle absolute w-2 h-2 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-30 animate-particle stagger-3" style="left: 90%; top: 65%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-1" style="left: 10%; top: 20%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-2" style="left: 20%; top: 40%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-3" style="left: 30%; top: 60%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-4" style="left: 40%; top: 30%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-5" style="left: 50%; top: 70%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-6" style="left: 60%; top: 25%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-1" style="left: 70%; top: 50%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-2" style="left: 80%; top: 35%;"></div>
+            <div class="particle absolute w-2 h-2 dark-particle opacity-40 animate-particle stagger-3" style="left: 90%; top: 65%;"></div>
         </div>
 
-        <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 animate-float"></div>
-        <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg opacity-20 animate-float-reverse"></div>
-        <div class="absolute bottom-40 left-20 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-20 animate-float"></div>
+        <div class="absolute top-20 left-10 w-20 h-20 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-20 animate-float blur-sm"></div>
+        <div class="absolute top-40 right-20 w-16 h-16 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg opacity-20 animate-float-reverse blur-sm"></div>
+        <div class="absolute bottom-40 left-20 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full opacity-20 animate-float blur-sm"></div>
 
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div class="space-y-8 slide-in-left">
                     <div class="space-y-6">
-                        <div class="inline-flex items-center bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-medium animate-pulse-custom">
+                        <div class="inline-flex items-center glass-dark text-blue-300 px-4 py-2 rounded-full text-sm font-medium animate-pulse-custom neon-glow">
                             <i data-lucide="sparkles" class="w-4 h-4 mr-2"></i>
                             Next-Generation AI Solutions
                         </div>
                         
-                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight h1-typing-container">
+                        <h1 class="text-5xl lg:text-7xl font-bold leading-tight h1-typing-container text-white">
                             Let Your Business Flow With <span class="text-gradient animate-gradient">Fine Automations</span>
                         </h1>
                         
-                        <p class="text-xl text-gray-600 leading-relaxed max-w-2xl fade-in">
+                        <p class="text-xl text-gray-300 leading-relaxed max-w-2xl fade-in">
                             Transform your operations with our cutting-edge AI platform. Automate processes, 
                             gain insights, and accelerate growth with intelligent solutions tailored for your business.
                         </p>
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-4 fade-in">
-                        <button class="bg-gradient-animated text-white px-8 py-4 rounded-full hover:shadow-2xl transition-all flex items-center justify-center btn-hover">
+                        <a href="https://tally.so/r/3jR4r6" target="_blank" class="bg-gradient-animated text-white px-8 py-4 rounded-full hover:shadow-2xl transition-all flex items-center justify-center btn-hover neon-glow">
                             <span>Apply Now</span>
-                            <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
-                        </button>
+                        </a>
                     </div>
 
                     <div class="flex items-center space-x-8 pt-8 fade-in">
                         <div class="text-center scale-in stagger-1">
-                            <div class="text-3xl font-bold text-gray-900">50K+</div>
-                            <div class="text-gray-600">Active Users</div>
+                            <div class="text-3xl font-bold text-white">250+</div>
+                            <div class="text-gray-400">Systems</div>
                         </div>
                         <div class="text-center scale-in stagger-2">
-                            <div class="text-3xl font-bold text-gray-900">99.9%</div>
-                            <div class="text-gray-600">Uptime</div>
+                            <div class="text-3xl font-bold text-white">100%</div>
+                            <div class="text-gray-400">Stability</div>
                         </div>
                         <div class="text-center scale-in stagger-3">
-                            <div class="text-3xl font-bold text-gray-900">24/7</div>
-                            <div class="text-gray-600">Support</div>
+                            <div class="text-3xl font-bold text-white">99.9%</div>
+                            <div class="text-gray-400">Uptime</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="relative slide-in-right">
-                    <div id="image-carousel" class="relative z-10 bg-white rounded-2xl shadow-2xl transform card-hover overflow-hidden w-full aspect-video flex items-center justify-center">
+                    <div id="image-carousel" class="relative z-10 glass-dark rounded-2xl shadow-2xl transform card-hover overflow-hidden w-full aspect-video flex items-center justify-center neon-glow">
                         <img src="images/logo1.png" alt="AI Interface 1" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-100">
-                        <img src="images/logo2.png" alt="AI Interface 2" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
+                        <img src="images/logo2.png" alt="AI Interface 2" class="absolute inset-0 w-auto h-auto object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         <img src="images/logo3.png" alt="AI Interface 3" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         <img src="images/logo4.png" alt="AI Interface 4" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         <img src="images/logo5.png" alt="AI Interface 5" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out opacity-0">
                         
                         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-                            <button class="carousel-dot w-3 h-3 bg-white/50 rounded-full focus:outline-none transition-all duration-300"></button>
-                            <button class="carousel-dot w-3 h-3 bg-white/50 rounded-full focus:outline-none transition-all duration-300"></button>
-                            <button class="carousel-dot w-3 h-3 bg-white/50 rounded-full focus:outline-none transition-all duration-300"></button>
-                            <button class="carousel-dot w-3 h-3 bg-white/50 rounded-full focus:outline-none transition-all duration-300"></button>
-                            <button class="carousel-dot w-3 h-3 bg-white/50 rounded-full focus:outline-none transition-all duration-300"></button>
+                            <button class="carousel-dot w-3 h-3 bg-white/30 rounded-full focus:outline-none transition-all duration-300"></button>
+                            <button class="carousel-dot w-3 h-3 bg-white/30 rounded-full focus:outline-none transition-all duration-300"></button>
+                            <button class="carousel-dot w-3 h-3 bg-white/30 rounded-full focus:outline-none transition-all duration-300"></button>
+                            <button class="carousel-dot w-3 h-3 bg-white/30 rounded-full focus:outline-none transition-all duration-300"></button>
+                            <button class="carousel-dot w-3 h-3 bg-white/30 rounded-full focus:outline-none transition-all duration-300"></button>
                         </div>
                     </div>
                     
-                    <div class="absolute -top-4 -right-4 w-72 h-72 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl opacity-20 animate-float"></div>
-                    <div class="absolute -bottom-4 -left-4 w-64 h-64 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-20 animate-float-reverse"></div>
+                    <div class="absolute -top-4 -right-4 w-72 h-72 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl opacity-10 animate-float blur-xl"></div>
+                    <div class="absolute -bottom-4 -left-4 w-64 h-64 bg-gradient-to-br from-purple-600 to-pink-600 rounded-2xl opacity-10 animate-float-reverse blur-xl"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="features" class="py-20 bg-white relative overflow-hidden">
+    <section id="features" class="py-20 bg-gray-900 relative overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full opacity-50 animate-float"></div>
-            <div class="absolute bottom-20 right-10 w-24 h-24 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full opacity-50 animate-float-reverse"></div>
+            <div class="absolute top-20 left-10 w-32 h-32 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-10 animate-float blur-2xl"></div>
+            <div class="absolute bottom-20 right-10 w-24 h-24 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full opacity-10 animate-float-reverse blur-2xl"></div>
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-white">
                     Our
                     <span class="text-gradient animate-gradient"> Services</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     Discover the capabilities that make FineFlow AI the preferred choice for 
                     forward-thinking companies worldwide.
                 </p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-1">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
-                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                <div class="group p-8 dark-card rounded-2xl hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-1 neon-glow">
+                    <div class="w-14 h-14 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
+                        <img src="images/section1-icon1.png" alt="AI Outbound Campaigns Icon">
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-gray-900">AI Outbound Campaigns</h3>
-                    <p class="text-gray-600 leading-relaxed">AI-powered personalization that resonates with prospects.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-white">AI Outbound Campaigns</h3>
+                    <p class="text-gray-400 leading-relaxed">AI-powered personalization that resonates with prospects.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-2">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
-                        <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+                <div class="group p-8 dark-card rounded-2xl hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-2 neon-glow">
+                    <div class="w-14 h-14 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
+                        <img src="images/section1-icon2.png" alt="Targeted Messaging Icon">
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Targeted Messaging</h3>
-                    <p class="text-gray-600 leading-relaxed">AI-powered personalization that resonates with prospects.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Targeted Messaging</h3>
+                    <p class="text-gray-400 leading-relaxed">AI-powered personalization that resonates with prospects.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-3">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
-                        <i data-lucide="shield" class="w-7 h-7 text-white"></i>
+                <div class="group p-8 dark-card rounded-2xl hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-3 neon-glow">
+                    <div class="w-14 h-14 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
+                        <img src="images/section1-icon3.png" alt="Market Fit Discovery Icon">
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Market Fit Discovery</h3>
-                    <p class="text-gray-600 leading-relaxed">Rapid testing to identify your most receptive customers.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Market Fit Discovery</h3>
+                    <p class="text-gray-400 leading-relaxed">Rapid testing to identify your most receptive customers.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-4">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
-                        <i data-lucide="bar-chart" class="w-7 h-7 text-white"></i>
+                <div class="group p-8 dark-card rounded-2xl hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-4 neon-glow">
+                    <div class="w-14 h-14 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
+                        <img src="images/section1-icon4.png" alt="AI Workflows Icon">
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-gray-900">AI Workflows</h3>
-                    <p class="text-gray-600 leading-relaxed">Custom automation that eliminates manual tasks completely.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-white">AI Workflows</h3>
+                    <p class="text-gray-400 leading-relaxed">Custom automation that eliminates manual tasks completely.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-5">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
-                        <i data-lucide="settings" class="w-7 h-7 text-white"></i>
+                <div class="group p-8 dark-card rounded-2xl hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-5 neon-glow">
+                    <div class="w-14 h-14 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
+                       <img src="images/section1-icon5.png" alt="Custom Interfaces Icon">
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Custom Interfaces</h3>
-                    <p class="text-gray-600 leading-relaxed">Intuitive dashboards with real-time monitoring and control.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Custom Interfaces</h3>
+                    <p class="text-gray-400 leading-relaxed">Intuitive dashboards with real-time monitoring and control.</p>
                 </div>
 
-                <div class="group p-8 bg-white rounded-2xl border border-gray-100 hover:border-blue-200 hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-6">
-                    <div class="w-14 h-14 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
-                        <i data-lucide="users" class="w-7 h-7 text-white"></i>
+                <div class="group p-8 dark-card rounded-2xl hover:shadow-xl transition-all duration-300 card-hover fade-in stagger-6 neon-glow">
+                    <div class="w-14 h-14 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center mb-6 animate-pulse-custom">
+                        <img src="images/section1-icon6.png" alt="Sales Administration Icon">
                     </div>
-                    <h3 class="text-xl font-semibold mb-4 text-gray-900">Sales Administration</h3>
-                    <p class="text-gray-600 leading-relaxed">Streamlined CRMs and AI tools for your sales pipeline.</p>
+                    <h3 class="text-xl font-semibold mb-4 text-white">Sales Administration</h3>
+                    <p class="text-gray-400 leading-relaxed">Streamlined CRMs and AI tools for your sales pipeline.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="services" class="py-20 bg-gray-50 relative overflow-hidden">
+    <section id="services" class="py-20 bg-black relative overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-200 to-purple-200 rounded-full opacity-20 blur-3xl animate-float"></div>
-            <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-200 to-pink-200 rounded-full opacity-20 blur-3xl animate-float-reverse"></div>
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full opacity-5 blur-3xl animate-float"></div>
+            <div class="absolute bottom-0 right-1/4 w-80 h-80 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full opacity-5 blur-3xl animate-float-reverse"></div>
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="text-center mb-16 fade-in">
-                <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-white">
                     What We Build, What You <span class="text-gradient animate-gradient">Get</span>
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
                     Comprehensive AI solutions designed to address your specific business challenges 
                     and drive measurable results.
                 </p>
             </div>
 
             <div class="grid lg:grid-cols-2 gap-8">
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left stagger-1">
+                <div class="dark-card p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left stagger-1 neon-glow">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="database" class="w-8 h-8 text-white"></i>
+                        <div class="w-16 h-16 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section2-icon1.png" alt="Lead Generation Icon">
                         </div>
                         
                         <div class="flex-1">
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">Lead Generation</h3>
-                            <p class="text-gray-600 mb-6 leading-relaxed">Transform raw data into actionable insights with our advanced analytics platform.</p>
+                            <h3 class="text-2xl font-semibold mb-4 text-white">Lead Generation</h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">Transform raw data into actionable insights with our advanced analytics platform.</p>
                             
                             <ul class="space-y-2">
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     AI Cold Email Systems
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Application Systems
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Content Systems
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Automated Reports
                                 </li>
@@ -562,30 +656,30 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right stagger-2">
+                <div class="dark-card p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right stagger-2 neon-glow">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="message-square" class="w-8 h-8 text-white"></i>
+                        <div class="w-16 h-16 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section2-icon2.png" alt="AI Chatbots Icon">
                         </div>
                         
                         <div class="flex-1">
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">AI Chatbots</h3>
-                            <p class="text-gray-600 mb-6 leading-relaxed">Deploy intelligent chatbots that understand context and provide human-like interactions.</p>
+                            <h3 class="text-2xl font-semibold mb-4 text-white">AI Chatbots</h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">Deploy intelligent chatbots that understand context and provide human-like interactions.</p>
                             
                             <ul class="space-y-2">
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Natural Language Processing
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     24/7 Availability
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Multi-platform Integration
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Learning Capabilities
                                 </li>
@@ -594,30 +688,30 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left stagger-3">
+                <div class="dark-card p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-left stagger-3 neon-glow">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="target" class="w-8 h-8 text-white"></i>
+                        <div class="w-16 h-16 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section2-icon3.png" alt="Custom Automation Icon">
                         </div>
                         
                         <div class="flex-1">
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">Custom Automation Interfaces</h3>
-                            <p class="text-gray-600 mb-6 leading-relaxed">Beautiful, intuitive dashboards and control panels for managing your automated processes</p>
+                            <h3 class="text-2xl font-semibold mb-4 text-white">Custom Automation Interfaces</h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">Beautiful, intuitive dashboards and control panels for managing your automated processes</p>
                             
                             <ul class="space-y-2">
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Drag-and-drop builders
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Real-time monitoring
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Role-based access control
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Cost Reduction
                                 </li>
@@ -626,30 +720,30 @@
                     </div>
                 </div>
 
-                <div class="bg-white p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right stagger-4">
+                <div class="dark-card p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 card-hover slide-in-right stagger-4 neon-glow">
                     <div class="flex items-start space-x-6">
-                        <div class="w-16 h-16 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="trending-up" class="w-8 h-8 text-white"></i>
+                        <div class="w-16 h-16 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section2-icon4.png" alt="AI-Powered Solutions Icon">
                         </div>
                         
                         <div class="flex-1">
-                            <h3 class="text-2xl font-semibold mb-4 text-gray-900">AI-Powered Solutions</h3>
-                            <p class="text-gray-600 mb-6 leading-relaxed">Smart automation enhanced by artificial intelligence and machine learning</p>
+                            <h3 class="text-2xl font-semibold mb-4 text-white">AI-Powered Solutions</h3>
+                            <p class="text-gray-400 mb-6 leading-relaxed">Smart automation enhanced by artificial intelligence and machine learning</p>
                             
                             <ul class="space-y-2">
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Analysis
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     ChatGPT integration
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Predictive analytics
                                 </li>
-                                <li class="flex items-center text-gray-700">
+                                <li class="flex items-center text-gray-300">
                                     <div class="w-2 h-2 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full mr-3 animate-pulse-custom"></div>
                                     Intelligent decision-making
                                 </li>
@@ -661,93 +755,93 @@
         </div>
     </section>
 
-    <section id="about" class="py-20 bg-white relative overflow-hidden">
+    <section id="about" class="py-20 bg-gray-900 relative overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute top-1/4 left-0 w-64 h-64 bg-gradient-to-r from-blue-100 to-purple-100 rounded-full opacity-30 blur-2xl animate-float"></div>
-            <div class="absolute bottom-1/4 right-0 w-48 h-48 bg-gradient-to-r from-purple-100 to-pink-100 rounded-full opacity-30 blur-2xl animate-float-reverse"></div>
+            <div class="absolute top-1/4 left-0 w-64 h-64 bg-gradient-to-r from-white-600 to-white-600 rounded-full opacity-10 blur-2xl animate-float"></div>
+            <div class="absolute bottom-1/4 right-0 w-48 h-48 bg-gradient-to-r from-purple-600 to-pink-600 rounded-full opacity-10 blur-2xl animate-float-reverse"></div>
         </div>
         
         <div class="container mx-auto px-6 relative z-10">
             <div class="grid lg:grid-cols-2 gap-16 items-start">
                 <div class="slide-in-left">
-                    <h2 class="text-4xl lg:text-5xl font-bold mb-6">
+                    <h2 class="text-4xl lg:text-5xl font-bold mb-6 text-white">
                         About <span class="text-gradient animate-gradient">FineFlow AI</span>
                     </h2>
                     
                     <div class="space-y-6 mb-8">
-                        <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                        <p class="text-lg text-gray-300 leading-relaxed text-justify">
                             At FineFlow AI, we help businesses work smarter, not harder. As a specialized AI automation agency, we design and implement intelligent workflows that save time, cut costs, and boost efficiency. Using powerful platforms like n8n, we connect your tools, automate repetitive tasks, and create seamless processes that let your team focus on what truly matters: growth and innovation.
                         </p>
                         
-                        <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                        <p class="text-lg text-gray-300 leading-relaxed text-justify">
                             Whether it's streamlining operations, integrating apps, or building custom AI-powered solutions, we ensure every workflow runs with precision and reliability.
                         </p>
                         
-                        <p class="text-lg text-gray-600 leading-relaxed text-justify">
+                        <p class="text-lg text-gray-300 leading-relaxed text-justify">
                             Our mission is simple: Turn complexity into clarity through automation. With FineFlow AI, your business doesn't just keep up, it stays ahead.
                         </p>
                     </div>
                     
                     <div class="grid grid-cols-2 gap-6">
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-1">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">2+</div>
-                            <div class="text-gray-600">Years of Experience</div>
+                        <div class="text-center p-4 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover scale-in stagger-1 neon-glow">
+                            <div class="text-3xl font-bold text-white mb-2">2+</div>
+                            <div class="text-gray-400">Years of Experience</div>
                         </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-2">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">100+</div>
-                            <div class="text-gray-600">AI Systems</div>
+                        <div class="text-center p-4 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover scale-in stagger-2 neon-glow">
+                            <div class="text-3xl font-bold text-white mb-2">250+</div>
+                            <div class="text-gray-400">AI Systems</div>
                         </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-3">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">90%</div>
-                            <div class="text-gray-600">Time Saved</div>
+                        <div class="text-center p-4 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover scale-in stagger-3 neon-glow">
+                            <div class="text-3xl font-bold text-white mb-2">90%</div>
+                            <div class="text-gray-400">Time Saving</div>
                         </div>
-                        <div class="text-center p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover scale-in stagger-4">
-                            <div class="text-3xl font-bold text-gray-900 mb-2">80%</div>
-                            <div class="text-gray-600">Growth</div>
+                        <div class="text-center p-4 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover scale-in stagger-4 neon-glow">
+                            <div class="text-3xl font-bold text-white mb-2">70%</div>
+                            <div class="text-gray-400">Revenue Growth</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="space-y-6 slide-in-right">
-                    <h3 class="text-2xl font-semibold mb-6 text-gray-900">Our Core Values</h3>
+                    <h3 class="text-2xl font-semibold mb-6 text-white">Our Core Values</h3>
                     
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-1">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="award" class="w-6 h-6 text-white"></i>
+                    <div class="flex items-start space-x-4 p-6 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover fade-in stagger-1 neon-glow">
+                        <div class="w-12 h-12 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section3-icon1.png" alt="Excellence Icon">
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Excellence</h4>
-                            <p class="text-gray-600">We strive for perfection in every AI solution we deliver.</p>
+                            <h4 class="text-lg font-semibold mb-2 text-white">Excellence</h4>
+                            <p class="text-gray-400">We strive for perfection in every AI solution we deliver.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-2">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="globe" class="w-6 h-6 text-white"></i>
+                    <div class="flex items-start space-x-4 p-6 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover fade-in stagger-2 neon-glow">
+                        <div class="w-12 h-12 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section3-icon2.png" alt="Global Impact Icon">
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Global Impact</h4>
-                            <p class="text-gray-600">Making AI accessible to businesses worldwide.</p>
+                            <h4 class="text-lg font-semibold mb-2 text-white">Global Impact</h4>
+                            <p class="text-gray-400">Making AI accessible to businesses worldwide.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-3">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="rocket" class="w-6 h-6 text-white"></i>
+                    <div class="flex items-start space-x-4 p-6 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover fade-in stagger-3 neon-glow">
+                        <div class="w-12 h-12 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section3-icon3.png" alt="Innovation Icon">
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Innovation</h4>
-                            <p class="text-gray-600">Pushing the boundaries of what's possible with AI.</p>
+                            <h4 class="text-lg font-semibold mb-2 text-white">Innovation</h4>
+                            <p class="text-gray-400">Pushing the boundaries of what's possible with AI.</p>
                         </div>
                     </div>
 
-                    <div class="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors card-hover fade-in stagger-4">
-                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
-                            <i data-lucide="heart" class="w-6 h-6 text-white"></i>
+                    <div class="flex items-start space-x-4 p-6 dark-card rounded-xl hover:bg-gray-800 transition-colors card-hover fade-in stagger-4 neon-glow">
+                        <div class="w-12 h-12 bg-gradient-to-r from-white-600 to-white-600 rounded-2xl flex items-center justify-center flex-shrink-0 animate-pulse-custom">
+                            <img src="images/section3-icon4.png" alt="Customer First Icon">
                         </div>
                         <div>
-                            <h4 class="text-lg font-semibold mb-2 text-gray-900">Customer First</h4>
-                            <p class="text-gray-600">Your success is our primary motivation and measure of achievement.</p>
+                            <h4 class="text-lg font-semibold mb-2 text-white">Customer First</h4>
+                            <p class="text-gray-400">Your success is our primary motivation and measure of achievement.</p>
                         </div>
                     </div>
                 </div>
@@ -755,7 +849,7 @@
         </div>
     </section>
 
-    <section class="py-20 bg-gradient-to-r from-blue-600 to-purple-600 relative overflow-hidden">
+    <section class="py-20 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
         <div class="absolute inset-0">
             <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-1" style="left: 10%; top: 20%;"></div>
             <div class="absolute w-2 h-2 bg-white rounded-full opacity-30 animate-particle stagger-2" style="left: 20%; top: 40%;"></div>
@@ -786,22 +880,21 @@
                 </p>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button class="bg-white text-blue-600 px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all flex items-center justify-center btn-hover">
+                    <a href="https://tally.so/r/3jR4r6" target="_blank" class="glass-dark text-white px-8 py-4 rounded-full font-semibold hover:shadow-2xl transition-all flex items-center justify-center btn-hover neon-glow">
                         <span>Get in Touch</span>
-                        <i data-lucide="arrow-right" class="ml-2 w-5 h-5"></i>
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact" class="bg-gray-900 text-white py-16">
+    <footer id="contact" class="bg-black text-white py-16 border-t border-gray-800">
         <div class="container mx-auto px-6">
             <div class="grid lg:grid-cols-1 gap-8 mb-12">
                 <div class="flex flex-col items-center text-center"> 
                     <div class="flex items-center space-x-2 mb-6 justify-center">
                         <img src="images/logo.png" alt="FineFlowAI Logo" width="45" class="animate-pulse-custom">
-                        <span class="text-2xl font-bold">FineFlow AI</span>
+                        <span class="text-2xl font-bold text-gradient">FineFlow AI</span>
                     </div>
                     <p class="text-gray-400 mb-6 leading-relaxed max-w-md mx-auto">
                         Empowering businesses with intelligent AI solutions. Transform your operations, 
@@ -815,7 +908,7 @@
                         </div>
                         <div class="flex items-center text-gray-400 justify-center">
                             <i data-lucide="map-pin" class="w-5 h-5 mr-3"></i>
-                            <span>Pondicherry, IND</span>
+                            <span>Puducherry, IND</span>
                         </div>
                     </div>
                 </div>
@@ -828,13 +921,13 @@
                     </div>
                     
                     <div class="flex items-center space-x-6">
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors btn-hover">
+                        <a href="https://x.com/fineflowai?t=c39lGRH7P3UI1iq93wvb7A&s=09" target="_blank" class="text-gray-400 hover:text-white transition-colors btn-hover">
                             <i data-lucide="twitter" class="w-5 h-5"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors btn-hover">
+                        <a href="https://youtube.com/@agilaadhavan?si=3CIxbZQ5A8JpqGmC" target="_blank" class="text-gray-400 hover:text-white transition-colors btn-hover">
                             <i data-lucide="youtube" class="w-5 h-5"></i>
                         </a>
-                        <a href="#" class="text-gray-400 hover:text-white transition-colors btn-hover">
+                        <a href="https://www.instagram.com/fineflowai?utm_source=qr&igsh=ZGsyYzdqNHhuMTll" target="_blank" class="text-gray-400 hover:text-white transition-colors btn-hover">
                             <i data-lucide="instagram" class="w-5 h-5"></i>
                         </a>
                     </div>
@@ -860,10 +953,13 @@
         
         window.addEventListener('scroll', () => {
             if (window.scrollY > 10) {
-                header.classList.add('bg-white/95', 'backdrop-blur-sm', 'shadow-lg');
-                header.style.transform = 'translateY(0)';
+                header.classList.add('shadow-lg');
+                header.style.background = 'rgba(0, 0, 0, 0.9)';
+                header.style.backdropFilter = 'blur(20px)';
             } else {
-                header.classList.remove('bg-white/95', 'backdrop-blur-sm', 'shadow-lg');
+                header.classList.remove('shadow-lg');
+                header.style.background = 'rgba(0, 0, 0, 0.3)';
+                header.style.backdropFilter = 'blur(15px)';
             }
         });
 
@@ -912,18 +1008,20 @@
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-3px) scale(1.05)';
+                this.style.color = '#ffffff';
             });
             
             link.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
+                this.style.color = '#a1a1aa';
             });
         });
 
-        // Enhanced particle animation
+        // Enhanced particle animation for dark theme
         function createAdvancedParticle() {
             const particle = document.createElement('div');
             const size = Math.random() * 3 + 1;
-            particle.className = 'absolute bg-blue-400 rounded-full opacity-30';
+            particle.className = 'absolute dark-particle opacity-40';
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
             particle.style.left = Math.random() * 100 + '%';
@@ -949,12 +1047,12 @@
         document.querySelectorAll('.btn-hover').forEach(btn => {
             btn.addEventListener('mouseenter', function() {
                 this.style.transform = 'translateY(-4px) scale(1.08)';
-                this.style.boxShadow = '0 20px 40px rgba(0,0,0,0.3)';
+                this.style.boxShadow = '0 20px 40px rgba(59, 130, 246, 0.4)';
             });
             
             btn.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
-                this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
+                this.style.boxShadow = '0 4px 6px rgba(59, 130, 246, 0.2)';
             });
             
             btn.addEventListener('mousedown', function() {
@@ -968,16 +1066,16 @@
 
         // Enhanced card hover effects
         document.querySelectorAll('.card-hover').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.03) rotateX(5deg)';
-                this.style.boxShadow = '0 30px 60px rgba(0,0,0,0.2)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
-                this.style.boxShadow = '0 4px 6px rgba(0,0,0,0.1)';
-            });
-        });
+    card.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-5px) scale(1.01) rotateX(2deg)';
+        this.style.boxShadow = '0 10px 20px rgba(59, 130, 246, 0.3)';
+    });
+
+    card.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0) scale(1) rotateX(0deg)';
+        this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.3)';
+    });
+});
 
         // Enhanced parallax effect
         window.addEventListener('scroll', () => {
@@ -1022,11 +1120,13 @@
             
             dots.forEach((dot, i) => {
                 if (i === index) {
-                    dot.classList.remove('bg-white/50');
+                    dot.classList.remove('bg-white/30');
                     dot.classList.add('bg-white', 'scale-125');
+                    dot.style.boxShadow = '0 0 10px rgba(255, 255, 255, 0.5)';
                 } else {
                     dot.classList.remove('bg-white', 'scale-125');
-                    dot.classList.add('bg-white/50');
+                    dot.classList.add('bg-white/30');
+                    dot.style.boxShadow = 'none';
                 }
             });
         }
@@ -1048,9 +1148,6 @@
             });
         });
 
-        // Removed the typing animation script logic
-        // The H1 element is now set directly.
-
         // Add loading animation
         window.addEventListener('load', () => {
             document.body.style.opacity = '0';
@@ -1059,6 +1156,20 @@
                 document.body.style.opacity = '1';
             }, 100);
         });
+
+        // Add dynamic glow effects
+        // Add dynamic glow effects
+document.querySelectorAll('.neon-glow').forEach(element => {
+    element.addEventListener('mouseenter', function() {
+        // Reduce the glow intensity and spread
+        this.style.boxShadow = '0 0 10px rgba(59, 130, 246, 0.4), 0 0 20px rgba(139, 92, 246, 0.2)';
+    });
+
+    element.addEventListener('mouseleave', function() {
+        // Return to the original, less intense glow
+        this.style.boxShadow = '0 0 20px rgba(59, 130, 246, 0.3)';
+    });
+});
 
     </script>
 </body>
